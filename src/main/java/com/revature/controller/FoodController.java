@@ -2,6 +2,9 @@ package com.revature.controller;
 
 import com.revature.models.Food;
 import com.revature.repo.FoodRepo;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +25,9 @@ public class FoodController {
     public FoodController (FoodRepo foodRepo){this.foodRepo=foodRepo;}
 
     @GetMapping(path="/{type}")
-    public ResponseEntity<Food> getMealSuggestion(@PathVariable(name="type") String type){
-        Food suggestedFood=foodRepo.findByMealType(type);
-        return new ResponseEntity<>(suggestedFood, HttpStatus.OK);
+    public List<Food> getMealSuggestion(@PathVariable(name="type") String type){
+    	List<Food> suggestedFood=foodRepo.findByMealType(type);
+        System.out.println(suggestedFood);
+        return suggestedFood;
     }
 }
